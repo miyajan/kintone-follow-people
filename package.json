@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/miyajan/kintone-follow-people/issues"
   },
-  "homepage": "https://github.com/miyajan/kintone-follow-people#readme"
+  "homepage": "https://github.com/miyajan/kintone-follow-people#readme",
+  "dependencies": {
+    "js-base64": "^2.1.9",
+    "node-fetch": "^1.6.3"
+  }
 }
