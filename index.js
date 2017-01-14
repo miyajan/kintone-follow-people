@@ -15,14 +15,15 @@ class KintoneFollowPeople {
         this._password = password;
     }
 
+    /**
+     * @return {!Thenable.<!Array.<!Object>>}
+     */
     execute() {
         return this._getAllUsers().then(users => {
             return users
                 .filter(user => user.code !== this._username)
                 .map(user => this._subscribeUser(user));
-        }).then(subscribings => Promise.all(subscribings)).then(result => {
-            console.log(`Done! Now following ${result.length} users.`);
-        });
+        }).then(subscribings => Promise.all(subscribings));
     }
 
     /**
@@ -90,6 +91,12 @@ class KintoneFollowPeople {
     }
 }
 
+/**
+ * @param {string} fqdn
+ * @param {string} username
+ * @param {string} password
+ * @return {!Thenable.<!Array.<!Object>>}
+ */
 const followPeople = (fqdn, username, password) => {
     return new KintoneFollowPeople(fqdn, username, password).execute();
 };

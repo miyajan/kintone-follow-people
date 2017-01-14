@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "description": "Follow people in kintone",
   "main": "index.js",
+  "bin": {
+    "kintone-follow-people": "./bin/kintone-follow-people.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,13 +19,14 @@
   "keywords": [
     "kintone"
   ],
-  "author": "Jumpei Miyata <miyajan777@gmail.com> (http://www.kaizenprogrammer.com/)",
+  "author": "miyajan <miyajan777@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/miyajan/kintone-follow-people/issues"
   },
   "homepage": "https://github.com/miyajan/kintone-follow-people#readme",
   "dependencies": {
+    "commander": "^2.9.0",
     "js-base64": "^2.1.9",
     "node-fetch": "^1.6.3"
   }
