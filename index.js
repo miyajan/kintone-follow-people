@@ -20,10 +20,15 @@ class KintoneFollowPeople {
      */
     execute() {
         return this._getAllUsers().then(users => {
-            return users
-                .filter(user => user.code !== this._username)
-                .map(user => this._subscribeUser(user));
-        }).then(subscribings => Promise.all(subscribings));
+            users = users.filter(user => user.code !== this._username);
+            let promise = Promise.resolve();
+            users.forEach(user => {
+                promise = promise.then(() => {
+                    return this._subscribeUser(user);
+                });
+            });
+            return promise.then(() => users);
+        });
     }
 
     /**
