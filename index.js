@@ -9,10 +9,18 @@ const EVERYONE_GROUP_ID = '7532782697181632513';
 const MAX_GET_USERS_SIZE = 1000;
 
 class KintoneFollowPeople {
-    constructor(fqdn, username, password) {
+    /**
+     * Constructor
+     * @param {string} fqdn
+     * @param {string} username
+     * @param {string} password
+     * @param {Array.<string>=} opt_excludes
+     */
+    constructor(fqdn, username, password, opt_excludes) {
         this._fqdn = fqdn;
         this._username = username;
         this._password = password;
+        this._excludes = opt_excludes || [];
     }
 
     /**
@@ -20,7 +28,7 @@ class KintoneFollowPeople {
      */
     execute() {
         return this._getAllUsers().then(users => {
-            users = users.filter(user => user.code !== this._username);
+            users = users.filter(user => (user.code !== this._username) && (this._excludes.indexOf(user.code) === -1));
             let promise = Promise.resolve();
             users.forEach(user => {
                 promise = promise.then(() => {
@@ -100,10 +108,11 @@ class KintoneFollowPeople {
  * @param {string} fqdn
  * @param {string} username
  * @param {string} password
+ * @param {Array.<string>=} opt_excludes
  * @return {!Thenable.<!Array.<!Object>>}
  */
-const followPeople = (fqdn, username, password) => {
-    return new KintoneFollowPeople(fqdn, username, password).execute();
+const followPeople = (fqdn, username, password, opt_excludes) => {
+    return new KintoneFollowPeople(fqdn, username, password, opt_excludes).execute();
 };
 
 module.exports = followPeople;
