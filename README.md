@@ -57,8 +57,7 @@ Load above options from a configuration json file like:
     "password": "your-password",
     "excludes": [
         "non-follow-user1",
-        "non-follow-user2",
-        ...
+        "non-follow-user2"
     ]
 }
 ```
