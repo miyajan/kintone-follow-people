@@ -48,7 +48,7 @@ Specify users not to follow by comma-separated list of login names.
 
 ### ```-c``` or ```--config```
 
-Load above options from a configuration json file like:
+Specify a path to configuration file. You can load above options from the json file like:
 
 ```json
 {
