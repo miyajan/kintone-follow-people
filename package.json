@@ -10,7 +10,10 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ci": "npm run test:unit:cover",
+    "test": "npm run test:unit",
+    "test:unit": "./node_modules/.bin/mocha --require intelli-espower-loader test/unit",
+    "test:unit:cover": "./node_modules/.bin/istanbul --include-all-sources cover ./node_modules/.bin/_mocha --report lcovonly -- --require intelli-espower-loader test/unit"
   },
   "repository": {
     "type": "git",
@@ -29,5 +32,13 @@
     "commander": "^2.9.0",
     "js-base64": "^2.1.9",
     "node-fetch": "^1.6.3"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.15",
+    "intelli-espower-loader": "^1.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0",
+    "power-assert": "^1.4.2",
+    "proxyquire": "^1.7.10"
   }
 }
