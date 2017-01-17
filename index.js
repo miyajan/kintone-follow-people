@@ -11,10 +11,10 @@ const MAX_GET_USERS_SIZE = 1000;
 class KintoneFollowPeople {
     /**
      * Constructor
-     * @param {string} fqdn
-     * @param {string} username
-     * @param {string} password
-     * @param {Array.<string>=} opt_excludes
+     * @param {string} fqdn FQDN
+     * @param {string} username Username
+     * @param {string} password Password
+     * @param {Array.<string>=} opt_excludes Codes of users not to follow
      */
     constructor(fqdn, username, password, opt_excludes) {
         this._fqdn = fqdn;
@@ -24,7 +24,8 @@ class KintoneFollowPeople {
     }
 
     /**
-     * @return {!Thenable.<!Array.<!Object>>}
+     * Execute to follow peoples
+     * @return {!Thenable.<!Array.<!Object>>} Thenable. Users are passed to then.
      */
     execute() {
         return this._getAllUsers().then(users => {
@@ -40,8 +41,8 @@ class KintoneFollowPeople {
     }
 
     /**
-     * @param {string} path
-     * @param {!Object} data
+     * @param {string} path Path
+     * @param {!Object} data Post data
      * @return {!Thenable}
      * @private
      */
@@ -63,8 +64,8 @@ class KintoneFollowPeople {
     }
 
     /**
-     * @param {!Array.<!Object>} users
-     * @param {number} offset
+     * @param {!Array.<!Object>} users Users
+     * @param {number} offset Offset
      * @return {!Thenable}
      * @private
      */
@@ -91,7 +92,7 @@ class KintoneFollowPeople {
     }
 
     /**
-     * @param {!Object} user
+     * @param {!Object} user User
      * @return {!Thenable}
      * @private
      */
@@ -105,11 +106,12 @@ class KintoneFollowPeople {
 }
 
 /**
- * @param {string} fqdn
- * @param {string} username
- * @param {string} password
- * @param {Array.<string>=} opt_excludes
- * @return {!Thenable.<!Array.<!Object>>}
+ * Follow people
+ * @param {string} fqdn FQDN
+ * @param {string} username Username
+ * @param {string} password Password
+ * @param {Array.<string>=} opt_excludes Codes of users not to follow
+ * @return {!Thenable.<!Array.<!Object>>} Thenable. Users are passed to then.
  */
 const followPeople = (fqdn, username, password, opt_excludes) => {
     return new KintoneFollowPeople(fqdn, username, password, opt_excludes).execute();
