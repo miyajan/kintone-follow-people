@@ -46,6 +46,10 @@ Specify your password.
 
 Specify users not to follow by comma-separated list of login names.
 
+### ```-i``` or ```--includes```
+
+If this options is specified, follow only users included in this option. Specify by comma-separated list of login names.
+
 ### ```-c``` or ```--config```
 
 Specify a path to configuration file. You can load above options from the json file like:
@@ -58,6 +62,10 @@ Specify a path to configuration file. You can load above options from the json f
     "excludes": [
         "non-follow-user1",
         "non-follow-user2"
+    ],
+    "includes": [
+        "follow-user1",
+        "follow-user2"
     ]
 }
 ```
