@@ -15,12 +15,14 @@ class KintoneFollowPeople {
      * @param {string} username Username
      * @param {string} password Password
      * @param {Array.<string>=} opt_excludes Codes of users not to follow
+     * @param {Array.<string>=} opt_includes Only follow users whose code included in this parameter
      */
-    constructor(fqdn, username, password, opt_excludes) {
+    constructor(fqdn, username, password, opt_excludes, opt_includes) {
         this._fqdn = fqdn;
         this._username = username;
         this._password = password;
         this._excludes = opt_excludes || [];
+        this._includes = opt_includes || [];
     }
 
     /**
@@ -29,7 +31,7 @@ class KintoneFollowPeople {
      */
     execute() {
         return this._getAllUsers().then(users => {
-            users = users.filter(user => (user.code !== this._username) && (this._excludes.indexOf(user.code) === -1));
+            users = users.filter(user => this._doSubscribe(user));
             let promise = Promise.resolve();
             users.forEach(user => {
                 promise = promise.then(() => {
@@ -103,6 +105,28 @@ class KintoneFollowPeople {
             'subscribe': true,
         });
     }
+
+    /**
+     * @param {!Object} user User
+     * @return {boolean}
+     * @private
+     */
+    _doSubscribe(user) {
+        // not subscribe myself
+        if (user.code === this._username) {
+            return false;
+        }
+        // not subscribe users included in --excludes option
+        if (this._excludes.indexOf(user.code) > -1) {
+            return false;
+        }
+        // not subscribe users not included in --includes option if specified
+        if (this._includes.length > 0 && this._includes.indexOf(user.code) === -1) {
+            return false;
+        }
+        // subscribe
+        return true;
+    }
 }
 
 /**
@@ -111,10 +135,11 @@ class KintoneFollowPeople {
  * @param {string} username Username
  * @param {string} password Password
  * @param {Array.<string>=} opt_excludes Codes of users not to follow
+ * @param {Array.<string>=} opt_includes Only follow users whose code included in this parameter
  * @return {!Thenable.<!Array.<!Object>>} Thenable. Users are passed to then.
  */
-const followPeople = (fqdn, username, password, opt_excludes) => {
-    return new KintoneFollowPeople(fqdn, username, password, opt_excludes).execute();
+const followPeople = (fqdn, username, password, opt_excludes, opt_includes) => {
+    return new KintoneFollowPeople(fqdn, username, password, opt_excludes, opt_includes).execute();
 };
 
 module.exports = followPeople;
