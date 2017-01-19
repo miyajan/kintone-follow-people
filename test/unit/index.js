@@ -84,4 +84,22 @@ describe('followPeople', function() {
             ]);
         });
     });
+
+    it('only follow people included in --includes option if specified', function() {
+        return sut(fqdn, username, password, [], ['test-code3']).then(users => {
+            assert.deepEqual(subscribeData, [
+                JSON.stringify({
+                    'userId': 'test-id3',
+                    'subscribe': true
+                })
+            ]);
+            assert.deepEqual(users, [
+                {
+                    code: 'test-code3',
+                    name: 'test-name3',
+                    id: 'test-id3'
+                }
+            ]);
+        });
+    });
 });
