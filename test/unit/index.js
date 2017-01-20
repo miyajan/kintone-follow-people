@@ -85,6 +85,24 @@ describe('followPeople', function() {
         });
     });
 
+    it('not follow people included in --excludes option', function() {
+        return sut(fqdn, username, password, ['test-code3']).then(users => {
+            assert.deepEqual(subscribeData, [
+                JSON.stringify({
+                    'userId': 'test-id2',
+                    'subscribe': true
+                })
+            ]);
+            assert.deepEqual(users, [
+                {
+                    code: 'test-code2',
+                    name: 'test-name2',
+                    id: 'test-id2'
+                }
+            ]);
+        });
+    });
+
     it('only follow people included in --includes option if specified', function() {
         return sut(fqdn, username, password, [], ['test-code3']).then(users => {
             assert.deepEqual(subscribeData, [
