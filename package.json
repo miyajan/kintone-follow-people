@@ -1,6 +1,6 @@
 {
   "name": "kintone-follow-people",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Follow people in kintone",
   "main": "index.js",
   "bin": {

@@ -1,4 +1,15 @@
-## 0.2.0 (2017-01-19)
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/miyajan/kintone-follow-people/compare/0.2.0...0.3.0) (2018-03-28)
+
+
+### Features
+
+* support env proxy (http_proxy, https_proxy and so on) ([704f0e6](https://github.com/miyajan/kintone-follow-people/commit/704f0e6))
+
+
+
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/miyajan/kintone-follow-people/compare/0.1.0...0.2.0) (2017-01-19)
 
 
 #### Features
