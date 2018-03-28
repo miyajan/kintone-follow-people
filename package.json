@@ -30,8 +30,9 @@
   "homepage": "https://github.com/miyajan/kintone-follow-people",
   "dependencies": {
     "commander": "^2.9.0",
-    "js-base64": "^2.4.3",
-    "node-fetch": "^2.1.2"
+    "fetch-with-proxy": "^1.1.0",
+    "isomorphic-fetch": "^2.2.1",
+    "js-base64": "^2.4.3"
   },
   "devDependencies": {
     "coveralls": "^3.0.0",
