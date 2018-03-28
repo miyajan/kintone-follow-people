@@ -30,7 +30,7 @@
   "homepage": "https://github.com/miyajan/kintone-follow-people",
   "dependencies": {
     "commander": "^2.9.0",
-    "js-base64": "^2.1.9",
+    "js-base64": "^2.4.3",
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
