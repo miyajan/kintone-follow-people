@@ -1,6 +1,6 @@
 'use strict';
 
-const fetch = require('node-fetch');
+const fetch = require('fetch-with-proxy').default;
 const Base64 = require('js-base64').Base64;
 
 const USER_PATH = '/k/api/group/users.json';

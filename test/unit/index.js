@@ -13,41 +13,43 @@ describe('followPeople', function() {
         usersData = [];
         subscribeData = [];
         sut = proxyquire('../../index', {
-            'node-fetch': (url, opts) => {
-                if (url === `https://${fqdn}/k/api/group/users.json`) {
-                    usersData.push(opts.body);
-                    return Promise.resolve({
-                        status: 200,
-                        json: () => Promise.resolve({
-                            result: {
-                                entities: [
-                                    {
-                                        code: 'test-code1',
-                                        name: 'test-name1',
-                                        id: 'test-id1'
-                                    },
-                                    {
-                                        code: 'test-code2',
-                                        name: 'test-name2',
-                                        id: 'test-id2'
-                                    },
-                                    {
-                                        code: 'test-code3',
-                                        name: 'test-name3',
-                                        id: 'test-id3'
-                                    }
-                                ]
-                            }
+            'fetch-with-proxy': {
+                default: (url, opts) => {
+                    if (url === `https://${fqdn}/k/api/group/users.json`) {
+                        usersData.push(opts.body);
+                        return Promise.resolve({
+                            status: 200,
+                            json: () => Promise.resolve({
+                                result: {
+                                    entities: [
+                                        {
+                                            code: 'test-code1',
+                                            name: 'test-name1',
+                                            id: 'test-id1'
+                                        },
+                                        {
+                                            code: 'test-code2',
+                                            name: 'test-name2',
+                                            id: 'test-id2'
+                                        },
+                                        {
+                                            code: 'test-code3',
+                                            name: 'test-name3',
+                                            id: 'test-id3'
+                                        }
+                                    ]
+                                }
+                            })
+                        });
+                    } else if (url === `https://${fqdn}/k/api/people/user/subscribe.json`) {
+                        subscribeData.push(opts.body);
+                        return Promise.resolve({
+                            status: 200,
+                            json: () => Promise.resolve()
                         })
-                    });
-                } else if (url === `https://${fqdn}/k/api/people/user/subscribe.json`) {
-                    subscribeData.push(opts.body);
-                    return Promise.resolve({
-                        status: 200,
-                        json: () => Promise.resolve()
-                    })
-                } else {
-                    assert(false);
+                    } else {
+                        assert(false);
+                    }
                 }
             }
         });
